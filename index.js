@@ -2,6 +2,7 @@ import dotenv from "dotenv"
 import express from "express"
 import jwt from "jsonwebtoken"
 import { authRoutes } from "./routes/jwt.routes.js";
+import authMiddleware from "./middleware/auth.middleware.js";
 
 dotenv.config();
 
@@ -10,6 +11,7 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(authRoutes)
+app.use(authMiddleware)
 app.get('/', (req, res) => {
     res.send("Hello");
 })

@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { login, register } from "../controllers/jwt.controller.js";
+import { getProfile, login, register } from "../controllers/jwt.controller.js";
+import authMiddleware from "../middleware/auth.middleware.js";
 
 const router = Router()
 
 router.route('/auth/register').post(register)
 router.route('/auth/login').post(login)
-// router.route('/auth/login').post()
-// router.route('/auth/profile')
+router.get('/auth/profile', authMiddleware, getProfile)
 
 export const authRoutes = router;

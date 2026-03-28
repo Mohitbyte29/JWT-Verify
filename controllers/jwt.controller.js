@@ -31,7 +31,7 @@ export const login = async(req, res) => {
     }
     const user = users.find(n => n.email === email);
     if(!user){
-        return res.status(401).json({success: false, message: "Invalid Email or Password"});
+        return res.status(401).json({success: false, message: "User not exists"});
     }
     const isMatch = await argon.verify(user.password, password);
     if(!isMatch){
@@ -45,5 +45,5 @@ export const login = async(req, res) => {
 }
 
 export const getProfile = (req, res) => {
-    res.status(200).json({success: true, message: "Returns the logged in user's Profile"})
+    res.status(200).json({success: true, data: req.user})
 }
